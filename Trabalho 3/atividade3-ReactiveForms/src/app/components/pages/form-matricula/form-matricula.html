@@ -1,0 +1,337 @@
+<div class="container-fluid tela">
+
+  <div class="card formulario shadow-lg border-0 p-4">
+
+    <h2 class="titulo">Ficha de Matrícula</h2>
+    <p class="subtitulo">Preencha os dados abaixo</p>
+
+    <form [formGroup]="form">
+
+      <div class="row g-3">
+
+        <!-- NOME -->
+        <div class="col-md-6">
+          <label><i class="bi bi-person-fill me-2"></i>Nome *</label>
+
+          <input type="text"
+            class="form-control"
+            formControlName="nome"
+            [class.is-invalid]="nome?.invalid && nome?.touched">
+
+          @if (nome?.invalid && nome?.touched) {
+            <div class="invalid-feedback d-block">
+
+              @if (nome?.errors?.['required']) {
+                <span>Nome obrigatório.</span>
+              }
+
+              @if (nome?.errors?.['minlength']) {
+                <span>Mínimo 3 caracteres.</span>
+              }
+
+            </div>
+          }
+
+        </div>
+
+        <!-- EMAIL -->
+        <div class="col-md-6">
+
+          <label><i class="bi bi-envelope-fill me-2"></i>Email *</label>
+
+          <input type="email"
+            class="form-control"
+            formControlName="email"
+            [class.is-invalid]="email?.invalid && email?.touched">
+
+          @if (email?.invalid && email?.touched) {
+            <div class="invalid-feedback d-block">
+
+              @if (email?.errors?.['required']) {
+                <span>Email obrigatório.</span>
+              }
+
+              @if (email?.errors?.['email']) {
+                <span>Email inválido.</span>
+              }
+
+            </div>
+          }
+
+        </div>
+
+        <!-- IDADE -->
+        <div class="col-md-6">
+
+          <label><i class="bi bi-calendar2-week me-2"></i>Idade *</label>
+
+          <input type="number"
+            class="form-control"
+            formControlName="idade"
+            [class.is-invalid]="idade?.invalid && idade?.touched">
+
+          @if (idade?.invalid && idade?.touched) {
+            <div class="invalid-feedback d-block">
+
+              @if (idade?.errors?.['required']) {
+                <span>Idade obrigatória.</span>
+              }
+
+              @if (idade?.errors?.['min']) {
+                <span>Mínimo 18 anos.</span>
+              }
+
+            </div>
+          }
+
+        </div>
+
+        <!-- GENERO -->
+        <div class="col-md-6">
+
+          <label class="mb-2 d-block"> <i class="bi bi-person-badge-fill me-2"></i> Gênero *</label>
+
+          <div class="chips-genero">
+
+            <input
+              type="radio"
+              id="feminino"
+              value="Feminino"
+              formControlName="genero"
+              hidden>
+
+            <label for="feminino" class="chip">
+              Feminino
+            </label>
+
+
+            <input
+              type="radio"
+              id="masculino"
+              value="Masculino"
+              formControlName="genero"
+              hidden>
+
+            <label for="masculino" class="chip">
+              Masculino
+            </label>
+
+
+            <input
+              type="radio"
+              id="outro"
+              value="Outro"
+              formControlName="genero"
+              hidden>
+
+            <label for="outro" class="chip">
+              Outro
+            </label>
+
+          </div>
+
+          @if (genero?.invalid && genero?.touched) {
+            <div class="invalid-feedback d-block">
+              Selecione um gênero.
+            </div>
+          }
+
+        </div>
+
+        <!-- SENHA -->
+        <div class="col-md-6">
+
+          <label><i class="bi bi-lock-fill me-2"></i>Senha *</label>
+
+          <div class="input-group">
+
+            <input
+              [type]="mostrarSenha ? 'text' : 'password'"
+              class="form-control"
+              formControlName="senha"
+              [class.is-invalid]="senha?.invalid && senha?.touched">
+
+            <button
+              type="button"
+              class="btn btn-outline-secondary"
+              (click)="mostrarSenha = !mostrarSenha">
+
+              <i class="bi"
+                [class.bi-eye]="!mostrarSenha"
+                [class.bi-eye-slash]="mostrarSenha">
+              </i>
+
+            </button>
+
+          </div>
+
+          @if (senha?.value) {
+
+            <div class="mt-2">
+
+              <small class="fw-bold">
+                Força: {{ nivelSenha }}
+              </small>
+
+              <div class="barra-senha">
+
+                <div
+                  class="forca"
+                  [style.width.%]="porcentagemSenha"
+                  [style.background]="corSenha">
+                </div>
+
+              </div>
+
+            </div>
+
+          }
+
+          @if (senha?.invalid && senha?.touched) {
+
+            <div class="invalid-feedback d-block">
+
+              @if (senha?.errors?.['required']) {
+                Senha obrigatória.
+              }
+
+              @if (senha?.errors?.['minlength']) {
+                Mínimo de 6 caracteres.
+              }
+
+            </div>
+
+          }
+
+        </div>
+
+        <!-- CONFIRMAR -->
+        <div class="col-md-6">
+
+          <label><i class="bi bi-lock-fill me-2"></i>Confirmar Senha *</label>
+
+          <div class="input-group">
+
+            <input
+              [type]="mostrarConfirmarSenha ? 'text' : 'password'"
+              class="form-control"
+              formControlName="confirmarSenha"
+              [class.is-invalid]="
+                (confirmarSenha?.invalid && confirmarSenha?.touched) ||
+                (form.errors?.['senhaDiferente'] && confirmarSenha?.touched)
+              ">
+
+            <button type="button" class="btn btn-outline-secondary" (click)="mostrarConfirmarSenha = !mostrarConfirmarSenha">
+              <i class="bi"
+                [class.bi-eye]="!mostrarConfirmarSenha"
+                [class.bi-eye-slash]="mostrarConfirmarSenha">
+              </i>
+            </button>
+
+          </div>
+
+          @if (form.errors?.['senhaDiferente'] && confirmarSenha?.touched) {
+            <div class="invalid-feedback d-block">
+              As senhas não coincidem.
+            </div>
+          }
+
+        </div>
+
+        <!-- CIDADE -->
+        <div class="col-md-6">
+
+          <label><i class="bi bi-geo-alt-fill me-2"></i>Cidade *</label>
+
+          <select class="form-select"
+            formControlName="cidade"
+            [class.is-invalid]="cidade?.invalid && cidade?.touched">
+
+            <option value="">Selecione</option>
+            <option>Colatina</option>
+            <option>Marilândia</option>
+            <option>Linhares</option>
+            <option>Vitória</option>
+            <option>Serra</option>
+            <option>Outra</option>
+
+          </select>
+
+          @if (cidade?.invalid && cidade?.touched) {
+            <div class="invalid-feedback d-block">
+              Selecione uma cidade.
+            </div>
+          }
+
+        </div>
+
+        <!-- TELEFONES -->
+        <div class="col-md-6" formArrayName="telefones">
+
+          <label><i class="bi bi-telephone-fill me-2"></i>Telefones *</label>
+
+          @for (tel of telefones.controls; track tel) {
+
+            <div
+              [formGroupName]="$index"
+              class="d-flex gap-2 mb-2 align-items-center">
+
+              <input type="text" class="form-control" formControlName="numero" mask="(00) 00000-0000" placeholder="(27) 99999-9999">
+
+              @if (tel.get('numero')?.invalid && tel.get('numero')?.touched) {
+                <div class="invalid-feedback d-block">
+                  Telefone obrigatório.
+                </div>
+              }
+
+              @if (telefones.length > 1) {
+                <button type="button" class="btn btn-danger btn-x" (click)="removerTelefone($index)"> ✖ </button>
+              }
+
+            </div>
+          }
+
+          <button type="button" class="btn btn-success btn-sm mt-2" (click)="adicionarTelefone()">
+            + Adicionar telefone
+          </button>
+
+        </div>
+
+        <!-- TERMOS -->
+        <div class="col-12">
+
+          <div class="form-check mt-2">
+
+            <input type="checkbox" class="form-check-input" formControlName="termos">
+
+            <label class="form-check-label">
+              Aceito os termos *
+            </label>
+
+            @if (termos?.invalid && termos?.touched) {
+              <div class="invalid-feedback d-block">
+                Obrigatório aceitar os termos.
+              </div>
+            }
+
+          </div>
+
+        </div>
+
+        <!-- BOTÃO -->
+        <div class="col-12">
+
+          <button type="button" class="btn btn-success w-100 botao" [disabled]="form.invalid"
+            title="Preencha todos os campos obrigatórios"
+            (click)="cadastrar()"> Cadastrar 
+          </button>
+
+        </div>
+
+      </div>
+
+    </form>
+
+  </div>
+
+</div>

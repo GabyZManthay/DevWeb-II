@@ -1,0 +1,17 @@
+.resumo{
+  width:800px;
+  max-width:100%;
+  border-radius:25px;
+  animation:subir .5s ease;
+  background: rgba(255,255,255,0.92);
+  text-align:center;
+}
+
+.resumo h2{
+  color:#198754;
+  font-weight:bold;
+}
+
+.resumo p{
+  font-size:18px;
+}

@@ -1,0 +1,85 @@
+.formulario{
+  width:950px;
+  max-width:100%;
+  border-radius:25px;
+  animation:subir .5s ease;
+  background: rgba(255,255,255,0.92);
+}
+
+.titulo{
+  text-align:center;
+  font-weight:bold;
+  color:#198754;
+}
+
+.subtitulo{
+  text-align:center;
+  color:gray;
+  margin-bottom:25px;
+}
+
+.chips-genero{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+
+.chip{
+  min-width:110px;
+  height:38px;
+
+  display:flex;
+  justify-content:center;
+  align-items:center;
+
+  padding:0 16px;
+
+  border-radius:30px;
+  border:1px solid #dcdcdc;
+
+  background:white;
+  cursor:pointer;
+  font-size:14px;
+  font-weight:600;
+
+  transition:.3s;
+}
+
+/* hover */
+.chip:hover{
+  border-color:#198754;
+  background:#eefaf3;
+}
+
+/* selecionado */
+input[type="radio"]:checked + .chip{
+  background:#198754;
+  color:white;
+  border-color:#198754;
+}
+
+.barra-senha{
+  width:100%;
+  height:8px;
+  background:#e9ecef;
+  border-radius:10px;
+  overflow:hidden;
+  margin-top:5px;
+}
+
+.forca{
+  height:100%;
+  transition:.3s;
+}
+
+.toast-sucesso{
+  position:fixed;
+  top:20px;
+  right:20px;
+  background:#198754;
+  color:white;
+  padding:14px 20px;
+  border-radius:12px;
+  box-shadow:0 10px 25px rgba(0,0,0,.15);
+  z-index:999;
+}
