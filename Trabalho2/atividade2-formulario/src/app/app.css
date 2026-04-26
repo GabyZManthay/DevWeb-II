@@ -1,0 +1,29 @@
+:root {
+  --verde-principal: #198754;
+  --verde-secundario: #20c997;
+  --verde-escuro: #14532d;
+  --fundo-claro: #f0fdf4;
+}
+
+body {
+  background-color: #f0fdf4;
+}
+
+.card-verde {
+  border-left: 5px solid #198754;
+  border-radius: 12px;
+}
+
+input:focus, select:focus {
+  border-color: #198754 !important;
+  box-shadow: 0 0 0 0.2rem rgba(25, 135, 84, 0.25);
+}
+
+.btn-success {
+  background-color: #198754;
+  border: none;
+}
+
+.btn-success:hover {
+  background-color: #157347;
+}
