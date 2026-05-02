@@ -1,0 +1,164 @@
+<div class="container" style="max-width: 960px;">
+  
+    <!-- Header -->
+    <div class="header-card">
+        <h1>Agenda de Contatos</h1>
+        <p>Gerencie seus contatos de forma rápida e simples</p>
+    </div>
+
+    <!-- Formulário -->
+    <div class="card shadow-sm mb-4">
+    <div class="card-header bg-primary text-white fw-bold">
+        ➕ Novo Contato
+    </div>
+    <div class="card-body">
+        <form [formGroup]="contatoForm" (ngSubmit)="inserirContato()">
+        <div class="row g-3">
+            
+            <!-- Campo Nome -->
+            <div class="col-md-4">
+            <label class="form-label fw-bold">Nome</label>
+            <input type="text" class="form-control" formControlName="nome" placeholder="Ex: João Silva">
+            @if (contatoForm.get('nome')?.touched && contatoForm.get('nome')?.invalid) {
+                <div class="text-danger small mt-1 ps-1">
+                @if (contatoForm.get('nome')?.errors?.['required']) {
+                    O nome é obrigatório
+                }
+                </div>
+            }
+            </div>
+            
+            <!-- Campo Telefone -->
+            <div class="col-md-4">
+            <label class="form-label fw-bold">Telefone</label>
+            <input 
+                type="tel" 
+                class="form-control" 
+                formControlName="telefone" 
+                placeholder="(00) 00000-0000"
+                mask="(00) 00000-0000" 
+                [showMaskTyped]="true"
+                [placeHolderCharacter]="'_'"
+            >
+            @if (contatoForm.get('telefone')?.touched && contatoForm.get('telefone')?.invalid) {
+                <div class="text-danger small mt-1 ps-1">
+                @if (contatoForm.get('telefone')?.errors?.['required']) {
+                    O telefone é obrigatório
+                }
+                </div>
+            }
+            </div>
+
+            <!-- Campo E-mail -->
+            <div class="col-md-4">
+            <label class="form-label fw-bold">E-mail</label>
+            <input type="email" class="form-control" formControlName="email" placeholder="email@exemplo.com">
+            @if (contatoForm.get('email')?.touched && contatoForm.get('email')?.invalid) {
+                <div class="text-danger small mt-1 ps-1">
+                @if (contatoForm.get('email')?.errors?.['required']) {
+                    O e-mail é obrigatório
+                }
+                @if (contatoForm.get('email')?.errors?.['invalidEmail']) {
+                    Formato inválido (ex: email@exemplo.com)
+                }
+                </div>
+            }
+            </div>
+
+            <div class="col-12 text-end">
+            <button type="submit" class="btn btn-primary px-4" [disabled]="contatoForm.invalid">
+                Inserir
+            </button>
+            </div>
+        </div>
+        </form>
+    </div>
+    </div>
+
+    <!-- Tabela -->
+    <div class="card shadow-sm">
+        <div class="card-body p-0">
+        <table class="table table-hover table-striped mb-0">
+            <thead class="table-light">
+            <tr>
+                <th class="ps-3">Nome</th>
+                <th>Telefone</th>
+                <th>E-mail</th>
+                <th class="text-center pe-3">Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            @for (contato of contatos; track contato.id) {
+                <tr>
+                @if (idEmEdicao === contato.id) {
+                    <td>
+                        <input type="text" class="form-control form-control-sm" [formControl]="$any(edicaoForm.get('nome'))">
+                        @if ($any(edicaoForm.get('nome'))?.touched && $any(edicaoForm.get('nome'))?.invalid) {
+                            <div class="text-danger small mt-1">
+                                @if ($any(edicaoForm.get('nome'))?.errors?.['required']) {
+                                    O nome é obrigatório
+                                }
+                                @if ($any(edicaoForm.get('nome'))?.errors?.['minlength']) {
+                                    O nome deve ter pelo menos 3 caracteres
+                                }
+                            </div>
+                        }
+                    </td>
+                    
+                    <td>
+                    <input 
+                        type="tel" 
+                        class="form-control form-control-sm" 
+                        [formControl]="$any(edicaoForm.get('telefone'))"
+                        mask="(00) 00000-0000"
+                        [showMaskTyped]="true"
+                    >
+                    @if ($any(edicaoForm.get('telefone'))?.touched && $any(edicaoForm.get('telefone'))?.invalid) {
+                        <div class="text-danger small mt-1">
+                            @if ($any(edicaoForm.get('telefone'))?.errors?.['required']) {
+                                O telefone é obrigatório
+                            }
+                        </div>
+                    }
+                    </td>
+
+                    <td>
+                        <input type="email" class="form-control form-control-sm" [formControl]="$any(edicaoForm.get('email'))">
+                        @if ($any(edicaoForm.get('email'))?.touched && $any(edicaoForm.get('email'))?.invalid) {
+                            <div class="text-danger small mt-1">
+                                @if ($any(edicaoForm.get('email'))?.errors?.['required']) {
+                                    O e-mail é obrigatório
+                                }
+                                @if ($any(edicaoForm.get('email'))?.errors?.['invalidEmail']) {
+                                    Formato inválido (ex: nome@dominio.com)
+                                }
+                            </div>
+                        }
+                    </td>
+                    <td class="text-center">
+                    <button class="btn btn-success btn-sm me-1" (click)="salvarEdicao()" [disabled]="edicaoForm.invalid">💾 Salvar</button>
+                    <button class="btn btn-secondary btn-sm" (click)="cancelarEdicao()">❌ Cancelar</button>
+                    </td>
+                } @else {
+                    <td class="ps-3">{{ contato.nome }}</td>
+                    <td>{{ contato.telefone }}</td>
+                    <td>{{ contato.email }}</td>
+                    <td class="text-center pe-3">
+                    <button class="btn btn-warning btn-sm me-1 text-white" (click)="iniciarEdicao(contato.id)">✏️ Editar</button>
+                    <button class="btn btn-danger btn-sm" (click)="excluirContato(contato.id)">🗑️ Excluir</button>
+                    </td>
+                }
+                </tr>
+            }
+            </tbody>
+        </table>
+        
+        @if (contatos.length === 0) {
+            <div class="text-center py-5 text-muted">
+            <h5>Nenhum contato encontrado</h5>
+            <p>Use o formulário acima para adicionar o primeiro.</p>
+            </div>
+        }
+        </div>
+    </div>
+</div>
