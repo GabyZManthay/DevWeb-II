@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators, ValidatorFn, AbstractControl, ValidationErrors } from '@angular/forms';
 import { NgxMaskDirective } from 'ngx-mask';
+import { Contato } from '../../models/contato.model';
 
 function validarEmail(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -15,6 +16,20 @@ function validarEmail(): ValidatorFn {
   };
 }
 
+function validarEspacos(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null => {
+    const value = (control.value ?? '').toString();
+
+    if (!value) {
+      return null;
+    }
+
+    return value.trim().length === 0
+      ? { onlySpaces: true }
+      : null;
+  };
+}
+
 @Component({
   selector: 'app-agenda',
   standalone: true,
@@ -23,20 +38,20 @@ function validarEmail(): ValidatorFn {
   styleUrls: ['./agenda.css']
 })
 export class Agenda {
-  contatos: any[] = [];
+  contatos: Contato[] = [];
   contatoForm: FormGroup;
   edicaoForm: FormGroup;
   idEmEdicao: number | null = null;
 
   constructor(private fb: FormBuilder) {
     this.contatoForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(3)]],
+      nome: ['', [Validators.required, Validators.minLength(3), validarEspacos()]],
       telefone: ['', [Validators.required]], 
       email: ['', [Validators.required, validarEmail()]] 
     });
 
     this.edicaoForm = this.fb.group({
-      nome: ['', [Validators.required, Validators.minLength(3)]],
+      nome: ['', [Validators.required, Validators.minLength(3), validarEspacos()]],
       telefone: ['', [Validators.required]],
       email: ['', [Validators.required, validarEmail()]]
     });
@@ -48,11 +63,13 @@ export class Agenda {
       return;
     }
 
-    const novoContato = {
+    const { nome, telefone, email } = this.contatoForm.getRawValue();
+
+    const novoContato: Contato = {
       id: Date.now(),
-      nome: this.contatoForm.value.nome,
-      telefone: this.contatoForm.value.telefone,
-      email: this.contatoForm.value.email
+      nome: nome.trim(),
+      telefone: telefone.trim(),
+      email: email.trim()
     };
 
     this.contatos.push(novoContato);
@@ -82,16 +99,27 @@ export class Agenda {
 
   salvarEdicao(): void {
     if (this.edicaoForm.invalid || this.idEmEdicao === null) {
+      this.edicaoForm.markAllAsTouched();
       return;
     }
 
+    const { nome, telefone, email } = this.edicaoForm.getRawValue();
+
+    const dadosAtualizados = {
+      nome: nome.trim(),
+      telefone: telefone.trim(),
+      email: email.trim()
+    };
+
     const index = this.contatos.findIndex(c => c.id === this.idEmEdicao);
+
     if (index !== -1) {
       this.contatos[index] = {
         ...this.contatos[index],
-        ...this.edicaoForm.value
+        ...dadosAtualizados
       };
     }
+
     this.cancelarEdicao();
   }
 

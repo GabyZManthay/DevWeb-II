@@ -110,6 +110,10 @@
   letter-spacing: 0.5px;
 }
 
+.text-danger.small div {
+  margin-top: 2px;
+}
+
 /* Botão Principal */
 .btn-primary {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);

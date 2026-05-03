@@ -21,9 +21,15 @@
             <input type="text" class="form-control" formControlName="nome" placeholder="Ex: João Silva">
             @if (contatoForm.get('nome')?.touched && contatoForm.get('nome')?.invalid) {
                 <div class="text-danger small mt-1 ps-1">
-                @if (contatoForm.get('nome')?.errors?.['required']) {
-                    O nome é obrigatório
-                }
+                    @if (contatoForm.get('nome')?.errors?.['required']) {
+                    <div>O nome é obrigatório</div>
+                    }
+                    @if (contatoForm.get('nome')?.errors?.['minlength']) {
+                    <div>O nome deve ter pelo menos 3 caracteres</div>
+                    }
+                    @if (contatoForm.get('nome')?.errors?.['onlySpaces']) {
+                    <div>O nome não pode conter apenas espaços</div>
+                    }
                 </div>
             }
             </div>
@@ -93,13 +99,16 @@
                 @if (idEmEdicao === contato.id) {
                     <td>
                         <input type="text" class="form-control form-control-sm" [formControl]="$any(edicaoForm.get('nome'))">
-                        @if ($any(edicaoForm.get('nome'))?.touched && $any(edicaoForm.get('nome'))?.invalid) {
-                            <div class="text-danger small mt-1">
-                                @if ($any(edicaoForm.get('nome'))?.errors?.['required']) {
-                                    O nome é obrigatório
+                       @if (edicaoForm.get('nome')?.touched && edicaoForm.get('nome')?.invalid) {
+                            <div class="text-danger small mt-1 ps-1">
+                                @if (edicaoForm.get('nome')?.errors?.['required']) {
+                                <div>O nome é obrigatório</div>
                                 }
-                                @if ($any(edicaoForm.get('nome'))?.errors?.['minlength']) {
-                                    O nome deve ter pelo menos 3 caracteres
+                                @if (edicaoForm.get('nome')?.errors?.['minlength']) {
+                                <div>O nome deve ter pelo menos 3 caracteres</div>
+                                }
+                                @if (edicaoForm.get('nome')?.errors?.['onlySpaces']) {
+                                <div>O nome não pode conter apenas espaços</div>
                                 }
                             </div>
                         }
