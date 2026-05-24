@@ -1,0 +1,51 @@
+/* You can add global styles to this file, and also import other style files */
+@import "bootstrap-icons/font/bootstrap-icons.css";
+
+body {
+  background: linear-gradient(
+    to bottom,
+    #121212,
+    #181818
+  );
+
+  color: white;
+
+  min-height: 100vh;
+}
+
+.spotify-box {
+  background: #181818;
+  border-radius: 20px;
+  max-width: 700px;
+}
+
+.spotify-card {
+  background: #181818;
+  color: white;
+  border-radius: 20px;
+  overflow: hidden;
+  transition: 0.3s;
+}
+
+.spotify-card:hover {
+  transform: translateY(-10px);
+}
+
+.spotify-card img {
+  height: 320px;
+  object-fit: cover;
+}
+
+.bio {
+  max-height: 150px;
+  overflow-y: auto;
+  color: #d1d1d1;
+}
+
+.container,
+.hero-section {
+
+  position: relative;
+
+  z-index: 1;
+}
