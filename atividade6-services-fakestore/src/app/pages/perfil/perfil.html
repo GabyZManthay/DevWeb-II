@@ -1,0 +1,42 @@
+<app-navbar></app-navbar>
+
+<div class="perfil-container" *ngIf="user">
+
+  <div class="perfil-header">
+
+    <div class="avatar">
+      👤
+    </div>
+
+    <h1>
+      {{ user.name.firstname }}
+      {{ user.name.lastname }}
+    </h1>
+
+  </div>
+
+  <div class="perfil-info">
+
+    <div class="info-item">
+      <span>Usuário</span>
+      <p>{{ user.username }}</p>
+    </div>
+
+    <div class="info-item">
+      <span>Email</span>
+      <p>{{ user.email }}</p>
+    </div>
+
+    <div class="info-item">
+      <span>Telefone</span>
+      <p>{{ user.phone }}</p>
+    </div>
+
+    <div class="info-item">
+      <span>Cidade</span>
+      <p>{{ user.address.city }}</p>
+    </div>
+
+  </div>
+
+</div>

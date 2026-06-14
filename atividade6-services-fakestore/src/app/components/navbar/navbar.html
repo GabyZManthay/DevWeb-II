@@ -1,0 +1,79 @@
+<ng-container *ngIf="isLoggedIn()">
+  <nav class="navbar navbar-expand-lg aurum-navbar">
+
+    <div class="container">
+
+      <!-- LOGO -->
+      <a class="navbar-brand" routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+        💎 AURUM LUX
+      </a>
+
+      <!-- LINKS -->
+      <div class="navbar-nav ms-auto">
+
+        <a routerLink="/home" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">Início</a>
+
+        <a routerLink="/perfil" routerLinkActive="active">Perfil</a>
+
+        <a
+          href="#"
+          (click)="logout(); $event.preventDefault()">
+          Sair
+        </a>
+
+        <!-- BOTÃO CARRINHO -->
+        <button class="cart-btn" (click)="cartService.toggleCart()">
+          🛒
+        </button>
+
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- OVERLAY DO CARRINHO -->
+  <div class="cart-overlay"
+       *ngIf="cartService.cartOpen"
+       (click)="cartService.closeCart()">
+  </div>
+
+  <!-- DRAWER DO CARRINHO -->
+  <div class="cart-drawer"
+       [class.open]="cartService.cartOpen">
+
+  <h2>🛒 Carrinho</h2>
+
+  <div *ngFor="let item of cartService.getCart()" class="cart-item">
+
+    <img [src]="item.image">
+
+    <div class="info">
+      <h4>{{ item.title }}</h4>
+      <p>$ {{ item.price }}</p>
+
+      <div class="qty">
+        <button (click)="cartService.decrease(item)">-</button>
+        <span>{{ item.quantity }}</span>
+        <button (click)="cartService.addToCart(item)">+</button>
+      </div>
+
+    </div>
+
+    <button class="remove" (click)="cartService.remove(item)">
+      ✖
+    </button>
+
+  </div>
+
+  <div class="cart-footer">
+
+    <h3>Total: $ {{ cartService.getTotal() }}</h3>
+
+    <button class="checkout" routerLink="/checkout">
+      Finalizar compra
+    </button>
+
+  </div>
+
+</div>

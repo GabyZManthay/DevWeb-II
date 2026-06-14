@@ -1,0 +1,93 @@
+<app-navbar></app-navbar>
+
+<div class="hero">
+
+  <h1>Aurum Lux</h1>
+
+  <p>Premium Collection</p>
+
+  <div class="hero-description">
+    Bem-vindo à Aurum Lux, sua loja online de produtos premium. Explore nossa coleção e encontre itens cuidadosamente selecionados para oferecer qualidade, conforto e sofisticação.
+  </div>
+
+</div>
+
+<div class="marketplace-container">
+
+  <!-- HEADER -->
+  <div class="market-header">
+
+  <h1>Encontre seu produto</h1>
+
+    <!-- BUSCA -->
+    <input
+      type="text"
+      placeholder="Buscar produtos..."
+      [(ngModel)]="searchText"
+    />
+
+    <!-- FILTRO / ORDENAÇÃO -->
+    <div class="filters">
+
+      <select [(ngModel)]="sortOption">
+        <option value="default">Ordenar</option>
+        <option value="asc">Menor preço</option>
+        <option value="desc">Maior preço</option>
+      </select>
+
+    </div>
+
+  </div>
+
+  <!-- GRID -->
+  <div class="product-grid">
+
+    <div class="card"
+      *ngFor="let product of products | filter: searchText | sort: sortOption">
+
+      <!-- BADGE -->
+      <div class="badge" *ngIf="product.price < 50">
+        Barato
+      </div>
+
+      <!-- IMAGEM -->
+      <div class="card-image">
+        <img [src]="product.image" [alt]="product.title">
+      </div>
+
+      <!-- CONTEÚDO -->
+      <div class="card-body">
+
+        <h3>
+          {{ product.title }}
+        </h3>
+
+        <p class="price">
+          $ {{ product.price }}
+        </p>
+
+        <div class="card-footer">
+
+          <span class="rating">
+            ⭐ {{ product?.rating?.rate }}
+          </span>
+
+          <button class="cart-btn" (click)="addToCart(product)">
+            🛒 Add
+          </button>
+
+          <a
+            class="btn"
+            [routerLink]="['/produto', product.id]">
+            Ver
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

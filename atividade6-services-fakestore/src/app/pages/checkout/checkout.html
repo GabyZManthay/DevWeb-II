@@ -1,0 +1,46 @@
+<app-navbar></app-navbar>
+
+<div class="checkout-container">
+
+  <h1>Checkout</h1>
+
+  <!-- ITENS -->
+  <div class="checkout-items">
+
+    <div class="item" *ngFor="let item of cartService.getCart()">
+
+      <img [src]="item.image">
+
+      <div class="info">
+        <h3>{{ item.title }}</h3>
+
+        <p>Quantidade: {{ item.quantity }}</p>
+
+        <p>Preço unitário: $ {{ item.price }}</p>
+
+      </div>
+
+      <div class="subtotal">
+        $ {{ item.price * item.quantity }}
+      </div>
+
+    </div>
+
+  </div>
+
+  <!-- RESUMO -->
+  <div class="summary">
+
+    <h2>Resumo do pedido</h2>
+
+    <p>Total de itens: {{ cartService.getCart().length }}</p>
+
+    <h3>Total: $ {{ cartService.getTotal() }}</h3>
+
+    <button (click)="confirmOrder()">
+      Confirmar compra
+    </button>
+
+  </div>
+
+</div>

@@ -1,0 +1,80 @@
+.card {
+  background: #1a1a1a;
+  border: 1px solid rgba(212, 175, 55, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.4);
+  border-color: rgba(212, 175, 55, 0.5);
+}
+
+/* IMAGEM */
+.card-image {
+  background: #fff;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card img {
+  width: 100%;
+  height: 250px;
+  object-fit: contain;
+}
+
+/* CONTEÚDO */
+.card-body {
+  padding: 15px;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.card h3 {
+  font-size: 1.1rem;
+  color: #fff;
+  margin-bottom: 10px;
+
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* PREÇO */
+.price {
+  color: #d4af37;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+/* BOTÃO */
+.btn {
+  margin-top: auto;
+  display: inline-block;
+  text-align: center;
+
+  padding: 10px;
+  border-radius: 8px;
+
+  background: #d4af37;
+  color: #000;
+  font-weight: bold;
+  text-decoration: none;
+
+  transition: 0.2s;
+}
+
+.btn:hover {
+  filter: brightness(1.1);
+}

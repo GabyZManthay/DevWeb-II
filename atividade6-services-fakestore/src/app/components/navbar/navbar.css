@@ -1,0 +1,123 @@
+.aurum-navbar {
+  background: #111 !important;
+  border-bottom: 1px solid rgba(212,175,55,.3);
+  padding: 15px 0;
+}
+
+.navbar-brand {
+  color: #d4af37 !important;
+  font-size: 1.5rem;
+  font-weight: bold;
+  letter-spacing: 2px;
+}
+
+.navbar-nav {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.navbar-nav a {
+  color: white;
+  text-decoration: none;
+  transition: .3s;
+}
+
+.navbar-nav a:hover {
+  color: #d4af37;
+}
+
+.navbar-nav a.active {
+  color: #d4af37;
+  font-weight: 700;
+  border-bottom: 2px solid #d4af37;
+  padding-bottom: 2px;
+}
+
+/* BOTÃO CARRINHO */
+.cart-btn {
+  background: transparent;
+  border: 1px solid #d4af37;
+  color: #d4af37;
+  padding: 6px 10px;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+/* OVERLAY */
+.cart-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.6);
+  z-index: 999;
+}
+
+/* DRAWER FECHADO */
+.cart-drawer {
+  position: fixed;
+  top: 0;
+  right: -400px;
+
+  width: 380px;
+  height: 100vh;
+
+  background: #1a1a1a;
+  border-left: 1px solid #d4af37;
+
+  padding: 20px;
+  overflow-y: auto;
+
+  z-index: 1000;
+
+  transition: right 0.3s ease;
+}
+
+/* DRAWER ABERTO */
+.cart-drawer.open {
+  right: 0;
+}
+
+/* ITEM */
+.cart-item {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid #333;
+  padding-bottom: 10px;
+}
+
+.cart-item img {
+  width: 60px;
+  height: 60px;
+  object-fit: contain;
+  background: white;
+}
+
+/* QTY */
+.qty {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+}
+
+.qty button {
+  background: #d4af37;
+  border: none;
+  padding: 3px 8px;
+}
+
+/* REMOVE */
+.remove {
+  background: transparent;
+  border: none;
+  color: red;
+}
+
+/* CHECKOUT */
+.checkout {
+  width: 100%;
+  padding: 10px;
+  background: #d4af37;
+  border: none;
+  font-weight: bold;
+}

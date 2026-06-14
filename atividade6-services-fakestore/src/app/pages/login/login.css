@@ -1,0 +1,70 @@
+.login-container {
+  width: 420px;
+  margin: 60px auto;
+  padding: 30px;
+
+  background: #1a1a1a;
+  border: 1px solid rgba(212, 175, 55, 0.4);
+  border-radius: 12px;
+
+  box-shadow: 0 0 20px rgba(0,0,0,0.3);
+}
+
+.login-container h1 {
+  text-align: center;
+  color: #d4af37;
+  margin-bottom: 20px;
+}
+
+/* CARD DE TESTE */
+.login-teste {
+  background: #111;
+  border: 1px solid rgba(212, 175, 55, 0.25);
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 20px;
+}
+
+.login-teste h3 {
+  color: #d4af37;
+  margin-bottom: 10px;
+  font-size: 1rem;
+}
+
+.login-teste p {
+  color: #ddd;
+  margin: 5px 0;
+  font-size: 0.95rem;
+}
+
+input {
+  width: 100%;
+  margin-bottom: 15px;
+  padding: 10px;
+
+  border-radius: 8px;
+  border: 1px solid #333;
+  background: #111;
+  color: white;
+  outline: none;
+}
+
+input:focus {
+  border-color: #d4af37;
+}
+
+button {
+  width: 100%;
+  padding: 10px;
+
+  background: #d4af37;
+  border: none;
+  border-radius: 8px;
+
+  font-weight: bold;
+  cursor: pointer;
+}
+
+button:hover {
+  filter: brightness(1.1);
+}

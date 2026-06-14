@@ -1,0 +1,37 @@
+<app-navbar></app-navbar>
+
+<div class="produto-container" *ngIf="product">
+
+  <div class="produto-card">
+
+    <div class="produto-imagem">
+      <img [src]="product.image" [alt]="product.title">
+    </div>
+
+    <div class="produto-info">
+
+      <h1>{{ product.title }}</h1>
+
+      <p class="descricao">
+        {{ product.description }}
+      </p>
+
+      <div class="produto-detalhes">
+
+        <div class="preco">
+          <span>Preço</span>
+          <h2>R$ {{ product.price }}</h2>
+        </div>
+
+        <div class="rating">
+          <span>Avaliação</span>
+          <p>⭐ {{ product?.rating?.rate }}</p>
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</div>

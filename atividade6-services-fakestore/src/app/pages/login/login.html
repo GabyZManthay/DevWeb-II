@@ -1,0 +1,38 @@
+<div class="login-container">
+
+  <h1>Login</h1>
+
+  <!-- CARD DE TESTE -->
+  <div class="login-teste">
+    <h3>🔑 Acesso de Teste</h3>
+
+    <p><strong>Usuário:</strong> johnd</p>
+    <p><strong>Senha:</strong> m38rmF$</p>
+  </div>
+
+  <form #f="ngForm">
+
+    <input
+      type="text"
+      [(ngModel)]="username"
+      name="username"
+      placeholder="Username">
+
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Password">
+
+    <button
+      (click)="login()"
+      type="button"
+      [disabled]="loading">
+      {{ loading ? 'Entrando...' : 'Entrar' }}
+    </button>
+
+    <p class="error" *ngIf="error">{{ error }}</p>
+
+  </form>
+
+</div>
