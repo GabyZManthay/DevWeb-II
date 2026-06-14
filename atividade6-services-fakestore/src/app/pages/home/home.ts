@@ -20,12 +20,22 @@ export class Home implements OnInit {
   searchText: string = '';
   sortOption: string = 'default';
   cartOpen: boolean = false;
+  notificationMessage: string = '';
+  notificationType: 'success' | 'error' = 'success';
 
   constructor(
     private productService:ProductService,
     private cdr: ChangeDetectorRef,
     public cartService: CartService
   ){}
+
+  showNotification(message: string, type: 'success' | 'error' = 'success') {
+    this.notificationMessage = message;
+    this.notificationType = type;
+    setTimeout(() => {
+      this.notificationMessage = '';
+    }, 3000);
+  }
 
   ngOnInit(): void {
 
@@ -43,11 +53,11 @@ export class Home implements OnInit {
 
   addToCart(product: any) {
     this.cartService.addToCart(product);
-    alert('Produto adicionado ao carrinho!');
+    this.showNotification('Produto adicionado ao carrinho!', 'success');
   }
 
   checkout() {
-    alert('Compra finalizada com sucesso 🎉');
+    this.showNotification('Compra finalizada com sucesso 🎉', 'success');
     this.cartService.clearCart();
     this.cartOpen = false;
   }

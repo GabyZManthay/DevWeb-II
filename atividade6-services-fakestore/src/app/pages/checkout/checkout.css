@@ -5,6 +5,28 @@
   color: white;
 }
 
+.notification {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 16px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+  text-align: center;
+}
+
+.notification.success {
+  background: rgba(212, 175, 55, 0.15);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+  color: #f8eccc;
+}
+
+.notification.error {
+  background: rgba(255, 88, 88, 0.15);
+  border: 1px solid rgba(255, 88, 88, 0.35);
+  color: #ffd9d9;
+}
+
 .checkout-items {
   margin-top: 20px;
 }

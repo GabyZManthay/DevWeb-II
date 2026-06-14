@@ -11,6 +11,9 @@ import { AuthService } from '../../services/auth-service';
   styleUrl: './navbar.css',
 })
 export class Navbar {
+  notificationMessage: string = '';
+  notificationType: 'success' | 'error' = 'success';
+
   constructor(
     private router: Router,
     public cartService: CartService,
@@ -26,15 +29,23 @@ export class Navbar {
     return this.authService.isLoggedIn();
   }
 
+  showNotification(message: string, type: 'success' | 'error' = 'success') {
+    this.notificationMessage = message;
+    this.notificationType = type;
+    setTimeout(() => {
+      this.notificationMessage = '';
+    }, 3000);
+  }
+
   checkout() {
     const total = this.cartService.getTotal();
 
     if (this.cartService.getCart().length === 0) {
-      alert('Seu carrinho está vazio 🛒');
+      this.showNotification('Seu carrinho está vazio 🛒', 'error');
       return;
     }
 
-    alert(`Compra realizada com sucesso! 🎉\nTotal: $ ${total}`);
+    this.showNotification(`Compra realizada com sucesso! 🎉\nTotal: $ ${total}`, 'success');
 
     this.cartService.clearCart();
     this.cartService.closeCart();
