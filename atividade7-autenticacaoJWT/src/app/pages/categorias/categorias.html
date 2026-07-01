@@ -1,0 +1,36 @@
+<div class="container py-4">
+  <div class="page-header d-flex flex-column flex-md-row justify-content-between align-items-start align-items-md-center gap-3 mb-4">
+    <div>
+      <h1>Categorias</h1>
+      <p class="text-muted mb-0">Explore e simule a gestão de categorias da API.</p>
+    </div>
+    <a routerLink="/categorias/incluir" class="btn btn-success">+ Nova Categoria</a>
+  </div>
+
+  <div class="row mb-4">
+    <div class="col-md-6">
+      <input class="form-control" placeholder="Buscar categoria" [(ngModel)]="filtro">
+    </div>
+  </div>
+
+  @if(categoriasFiltradas.length === 0){
+    <div class="alert alert-info">Nenhuma categoria encontrada.</div>
+  }
+
+  <div class="row">
+    @for(categoria of categoriasFiltradas; track categoria.id){
+      <div class="col-sm-6 col-lg-4">
+        <div class="card category-card mb-4">
+          <img class="category-image" [src]="categoria.image" alt="{{categoria.name}}">
+          <div class="card-body">
+            <h5>{{categoria.name}}</h5>
+            <div class="d-flex gap-2 flex-wrap">
+              <a routerLink="/categorias/editar" class="btn btn-sm btn-warning">Editar</a>
+              <a routerLink="/categorias/excluir" class="btn btn-sm btn-danger">Excluir</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+</div>

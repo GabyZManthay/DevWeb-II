@@ -1,0 +1,12 @@
+<div class="container py-4">
+  <div class="page-header mb-4">
+    <h1>Editar Produto</h1>
+    <p class="text-muted">Simulação de edição. As alterações são aplicadas localmente.</p>
+  </div>
+
+  <form>
+    <input class="form-control mb-3" placeholder="Nome" [(ngModel)]="nome" name="nome" (ngModelChange)="markAlterado()">
+    <input class="form-control mb-3" placeholder="Preço" [(ngModel)]="preco" name="preco" (ngModelChange)="markAlterado()">
+    <button type="button" class="btn btn-warning" (click)="salvar()">Salvar</button>
+  </form>
+</div>

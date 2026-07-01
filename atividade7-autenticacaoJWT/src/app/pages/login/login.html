@@ -1,0 +1,25 @@
+<div class="login-page">
+  <div class="login-card">
+    <div class="login-header mb-4">
+      <h2>Acesse sua conta</h2>
+      <p class="text-muted">Use o login abaixo para acessar a aplicação de demonstração.</p>
+    </div>
+
+    <div class="login-hint alert alert-info py-3 mb-4">
+      <strong>Exemplo de login:</strong>
+      <p class="mb-1">Email: admin@mail.com</p>
+      <p class="mb-2">Senha: admin123</p>
+      <button class="btn btn-outline-primary btn-sm" type="button" (click)="preencherExemplo()">
+        Preencher automaticamente
+      </button>
+    </div>
+
+    <input class="form-control mb-3" [(ngModel)]="email" placeholder="Email">
+    <input class="form-control mb-3" type="password" [(ngModel)]="senha" placeholder="Senha">
+    <button class="btn btn-primary w-100 mb-3" (click)="login()">Entrar</button>
+
+    @if(erro){
+      <div class="alert alert-danger">Email ou senha inválidos.</div>
+    }
+  </div>
+</div>

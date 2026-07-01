@@ -1,0 +1,10 @@
+<nav class="navbar navbar-dark bg-dark px-4">
+  <a routerLink="/produtos" class="navbar-brand text-white">Fake Store</a>
+  @if(estaLogado){
+    <div class="nav-actions">
+      <a routerLink="/produtos" class="nav-link text-white">Produtos</a>
+      <a routerLink="/categorias" class="nav-link text-white">Categorias</a>
+      <button class="btn btn-outline-light btn-sm" (click)="logout()">Sair</button>
+    </div>
+  }
+</nav>
